@@ -1,0 +1,62 @@
+BR main
+a: .WORD 0
+c: .WORD 0
+m: .WORD 0
+j: .WORD 0
+temp: .WORD 0
+seed: .WORD 0
+rn: .WORD 0
+firstNum: .WORD 0
+colcnt: .WORD 0
+
+main: DECI seed,d
+      LDWA seed,d
+      STWA rn,d
+again: CALL product
+      ADDA c,d
+      STWA firstNum,d
+      CALL mod
+      CALL output
+      LDWA cmp,d
+      CPWA 100,i
+      BRGE end
+      BR again
+      
+
+
+output: LDWX colcnt, d
+        CPWX 10,i
+        BRGE nline
+cont:   DECO rn,d
+        ADDX 1,i
+        STWX colcnt,d
+        RET
+nline:  LDWX '\n',i
+        STWX charOut,d
+        BR cont
+        
+
+
+mod:  LDWX 0,i
+      LDWA firstNum,d
+top:  SUBA m,d
+      ADDX 1,i
+      CPWA secNum,d
+      BRLT finish
+      BR top
+finish: STWA rn,d
+      RET
+
+
+product:  LDWX 0,i
+          STWX j,d
+          LDWA 0,i
+for1:     CPWX rn,d
+          BRGE endFor1
+          ADDA a,d
+          LDWX j,d
+          ADDX 1,i
+          STWX j,d
+          BR for1
+endFor1:  STWA temp,d
+          RET
