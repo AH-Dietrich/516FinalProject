@@ -1,25 +1,28 @@
-BR main
-a: .WORD 0
-c: .WORD 0
-m: .WORD 0
+BR main 
+a: .EQUATE 7
+c: .EQUATE 3
+m: .EQUATE 15
 j: .WORD 0
 temp: .WORD 0
 seed: .WORD 0
-rn: .WORD 0
+rn: .WORD 0 ;global variable #2d
 firstNum: .WORD 0
 colcnt: .WORD 0
+cmp: .WORD 0
 
 main: DECI seed,d
       LDWA seed,d
       STWA rn,d
 again: CALL product
-      ADDA c,d
+      ADDA c,i
       STWA firstNum,d
       CALL mod
       CALL output
-      LDWA cmp,d
+      LDWA cmp,d 
       CPWA 100,i
       BRGE end
+      ADDA 1,i
+      STWA cmp,d
       BR again
       
 
@@ -30,18 +33,22 @@ output: LDWX colcnt, d
 cont:   DECO rn,d
         ADDX 1,i
         STWX colcnt,d
+        LDBX ' ',i
+        STBX charOut,d
         RET
-nline:  LDWX '\n',i
-        STWX charOut,d
+nline:  LDBX '\n',i
+        STBX charOut,d
+        LDWX 0,i
+        STWX colcnt,d
         BR cont
         
 
 
 mod:  LDWX 0,i
       LDWA firstNum,d
-top:  SUBA m,d
+top:  SUBA m,i
       ADDX 1,i
-      CPWA secNum,d
+      CPWA m,i 
       BRLT finish
       BR top
 finish: STWA rn,d
@@ -53,10 +60,12 @@ product:  LDWX 0,i
           LDWA 0,i
 for1:     CPWX rn,d
           BRGE endFor1
-          ADDA a,d
+          ADDA a,i
           LDWX j,d
           ADDX 1,i
           STWX j,d
           BR for1
 endFor1:  STWA temp,d
           RET
+
+end: .END
