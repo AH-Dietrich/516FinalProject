@@ -1,11 +1,11 @@
 BR main 
-a: .EQUATE 7
+a: .EQUATE 21
 c: .EQUATE 3
-m: .EQUATE 15
+m: .EQUATE 100
 j: .WORD 0
 temp: .WORD 0
 seed: .WORD 0
-rn: .WORD 0 ;global variable #2d
+rn: .WORD 0 
 firstNum: .WORD 0
 colcnt: .WORD 0
 cmp: .WORD 0
