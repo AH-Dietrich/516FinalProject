@@ -13,16 +13,16 @@ cmp: .WORD 0
 main: DECI seed,d
       LDWA seed,d
       STWA rn,d
-again: CALL product
+again: LDWA cmp,d 
+      CPWA 100,i
+      BRGE end
+      ADDA 1,i
+      STWA cmp,d 
+      CALL product
       ADDA c,i
       STWA firstNum,d
       CALL mod
       CALL output
-      LDWA cmp,d 
-      CPWA 100,i
-      BRGE end
-      ADDA 1,i
-      STWA cmp,d
       BR again
       
 
@@ -46,10 +46,10 @@ nline:  LDBX '\n',i
 
 mod:  LDWX 0,i
       LDWA firstNum,d
-top:  SUBA m,i
-      ADDX 1,i
-      CPWA m,i 
+top:  CPWA m,i 
       BRLT finish
+      SUBA m,i
+      ADDX 1,i
       BR top
 finish: STWA rn,d
       RET
