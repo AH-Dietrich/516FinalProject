@@ -3,7 +3,6 @@ a: .EQUATE 21
 c: .EQUATE 3
 m: .EQUATE 100
 j: .WORD 0
-temp: .WORD 0
 seed: .WORD 0
 rn: .WORD 0 
 firstNum: .WORD 0
@@ -25,7 +24,27 @@ again: LDWA cmp,d
       CALL output
       BR again
       
+product:  LDWX 0,i
+          STWX j,d
+          LDWA 0,i
+for1:     CPWX rn,d
+          BRGE endFor1
+          ADDA a,i
+          LDWX j,d
+          ADDX 1,i
+          STWX j,d
+          BR for1
+endFor1:  RET
 
+mod:  LDWX 0,i
+      LDWA firstNum,d
+top:  CPWA m,i 
+      BRLT finish
+      SUBA m,i
+      ADDX 1,i
+      BR top
+finish: STWA rn,d
+      RET
 
 output: LDWX colcnt, d
         CPWX 10,i
@@ -41,31 +60,6 @@ nline:  LDBX '\n',i
         LDWX 0,i
         STWX colcnt,d
         BR cont
-        
-
-
-mod:  LDWX 0,i
-      LDWA firstNum,d
-top:  CPWA m,i 
-      BRLT finish
-      SUBA m,i
-      ADDX 1,i
-      BR top
-finish: STWA rn,d
-      RET
-
-
-product:  LDWX 0,i
-          STWX j,d
-          LDWA 0,i
-for1:     CPWX rn,d
-          BRGE endFor1
-          ADDA a,i
-          LDWX j,d
-          ADDX 1,i
-          STWX j,d
-          BR for1
-endFor1:  STWA temp,d
-          RET
+       
 
 end: .END
