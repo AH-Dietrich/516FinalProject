@@ -4,7 +4,7 @@ This random number generator uses the basic Linear Congruential Generator
 The formula is: r_n+1 = (a*r_n + c) % m
 
 ***
-##Understanding of variables 
+## Understanding of variables 
 Where **r_n** (user input) is the random number generated
 
 **r_0** is the "seed". In our program it is decided by the user.
@@ -19,7 +19,7 @@ These numbers can be anything as long as m > a, m > c, m > r_0
 
 ***
 
-##Variables in our program:
+## Variables in our program:
 
 **colcnt** (Column Counter) Used to output the numbers in 10x10 columns properly. When it reaches the value of 10 it outputs a newline (\n) then resets to 0
 
@@ -27,7 +27,7 @@ These numbers can be anything as long as m > a, m > c, m > r_0
 
 ***
 
-##How to Properly Use the Program
+## How to Properly Use the Program
 
 1. Make sure to clear your memory in PEP 9. (Refer to **Setup1.png**) 
 
