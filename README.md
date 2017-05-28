@@ -5,7 +5,7 @@ The formula is: r_n+1 = (a*r_n + c) % m
 
 ***
 ## Understanding of variables 
-Where **r_n** (user input) is the random number generated
+Where **r_n**  is the random number generated
 
 **r_0** is the "seed". In our program it is decided by the user.
 
